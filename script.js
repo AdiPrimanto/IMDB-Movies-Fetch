@@ -70,3 +70,22 @@ function showMovieDetail(m) {
                 </div>
             </div>`;
 }
+
+// Mengaktifkan Layar Beranda (Add to Home Screen)
+window.addEventListener("beforeinstallprompt", function (event) {
+  event.preventDefault(); // Mencegah tampilan prompt instalasi otomatis
+  // Simpan event ke variabel untuk digunakan nanti
+  deferredPrompt = event;
+  // Tampilkan tombol atau UI lain untuk memicu prompt instalasi
+  installButton.style.display = "block";
+});
+
+installButton.addEventListener("click", function () {
+  deferredPrompt.prompt(); // Menampilkan prompt instalasi
+  deferredPrompt.userChoice.then(function (choiceResult) {
+    if (choiceResult.outcome === "accepted") {
+      console.log("Aplikasi diinstal");
+    }
+    deferredPrompt = null; // Setelah prompt ditampilkan, atur kembali ke null
+  });
+});

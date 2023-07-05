@@ -1,6 +1,6 @@
 {
-  "name": "My PWA",
-  "short_name": "PWA",
+  "name": "IMDB Movies",
+  "short_name": "movies-app",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
