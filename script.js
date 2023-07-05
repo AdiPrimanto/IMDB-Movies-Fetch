@@ -1,52 +1,51 @@
 //FETCH
-const searchButton = document.querySelector('.search-btn');
-searchButton.addEventListener('click', function() {
-
-    //mendapatkan value input
-    const inputKeyword = document.querySelector('.input-keyword');
-    fetch('http://www.omdbapi.com/?apikey=2fc72f8b&s=' + inputKeyword.value)
+const searchButton = document.querySelector(".search-btn");
+searchButton.addEventListener("click", function () {
+  //mendapatkan value input
+  const inputKeyword = document.querySelector(".input-keyword");
+  fetch("http://www.omdbapi.com/?apikey=2fc72f8b&s=" + inputKeyword.value, {
+    referrerPolicy: "strict-origin-when-cross-origin",
+  })
     //fetch mengembalikan promise, ketika dijlnkn tdk langsung mendapatkan data
 
     //kalau data fetch sudah dikembalikan dan jk berhasil ambil responsenya
-        // .then(response => console.log(response.json()));
-        .then(response => response.json())
-            // .then(response => console.log(response));
-            .then(response => {
-                const movies = response.Search;
-                let cards = '';
-                movies.forEach(m => cards += showCards(m));
+    // .then(response => console.log(response.json()));
+    .then((response) => response.json())
+    // .then(response => console.log(response));
+    .then((response) => {
+      const movies = response.Search;
+      let cards = "";
+      movies.forEach((m) => (cards += showCards(m)));
 
-                const movieContainer = document.querySelector('.movie-container');
-                movieContainer.innerHTML = cards;
+      const movieContainer = document.querySelector(".movie-container");
+      movieContainer.innerHTML = cards;
 
-                //ketika tombol detaik di klik
-                const modalDetailButton = document.querySelectorAll('.modal-detail-btn');
-                modalDetailButton.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        const imdbid = this.dataset.imdbid;
-                        // console.log(imdbid);
-                        fetch('http://www.omdbapi.com/?apikey=2fc72f8b&i=' + imdbid)
-                        .then(response => response.json())
-                            .then(m => {
-                                const movieDetail = showMovieDetail(m);
-                                const modalBody = document.querySelector('.modal-body');
-                                modalBody.innerHTML = movieDetail;
-                            })
-                    })
-                })
+      //ketika tombol detaik di klik
+      const modalDetailButton = document.querySelectorAll(".modal-detail-btn");
+      modalDetailButton.forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const imdbid = this.dataset.imdbid;
+          // console.log(imdbid);
+          fetch("http://www.omdbapi.com/?apikey=2fc72f8b&i=" + imdbid)
+            .then((response) => response.json())
+            .then((m) => {
+              const movieDetail = showMovieDetail(m);
+              const modalBody = document.querySelector(".modal-body");
+              modalBody.innerHTML = movieDetail;
             });
-
+        });
+      });
+    });
 });
 
-
 function showCards(m) {
-    return `<div class="col-md-4 my-3">
+  return `<div class="col-md-4 my-3">
                 <div class="card">
                     <img src="${m.Poster}" class="card-img-top">
                     <div class="card-body">
                     <h5 class="card-title">${m.Title}</h5>
                     <h6 class="card-subtitle mb-2 text-muted">${m.Year}</h6>
-                    <a href="#" class="btn btn-primary modal-detail-btn" data-toggle="modal" 
+                    <a href="#" class="btn btn-primary modal-detail-btn" data-toggle="modal"
                         data-target="#movieDetailModal" data-imdbid="${m.imdbID}">Details</a>
                     </div>
                 </div>
@@ -54,7 +53,7 @@ function showCards(m) {
 }
 
 function showMovieDetail(m) {
-    return `<div class="container-fluid">
+  return `<div class="container-fluid">
                 <div class="row">
                     <div class="col-md-3">
                         <img src="${m.Poster}" class="img-fluid">
