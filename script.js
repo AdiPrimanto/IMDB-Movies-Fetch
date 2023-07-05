@@ -26,7 +26,7 @@ searchButton.addEventListener("click", function () {
         btn.addEventListener("click", function () {
           const imdbid = this.dataset.imdbid;
           // console.log(imdbid);
-          fetch("http://www.omdbapi.com/?apikey=2fc72f8b&i=" + imdbid)
+          fetch("https://www.omdbapi.com/?apikey=2fc72f8b&i=" + imdbid)
             .then((response) => response.json())
             .then((m) => {
               const movieDetail = showMovieDetail(m);
