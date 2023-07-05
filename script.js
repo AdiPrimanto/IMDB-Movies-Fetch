@@ -3,7 +3,7 @@ const searchButton = document.querySelector(".search-btn");
 searchButton.addEventListener("click", function () {
   //mendapatkan value input
   const inputKeyword = document.querySelector(".input-keyword");
-  fetch("http://www.omdbapi.com/?apikey=2fc72f8b&s=" + inputKeyword.value, {
+  fetch("https://www.omdbapi.com/?apikey=2fc72f8b&s=" + inputKeyword.value, {
     referrerPolicy: "strict-origin-when-cross-origin",
   })
     //fetch mengembalikan promise, ketika dijlnkn tdk langsung mendapatkan data
@@ -20,7 +20,7 @@ searchButton.addEventListener("click", function () {
       const movieContainer = document.querySelector(".movie-container");
       movieContainer.innerHTML = cards;
 
-      //ketika tombol detaik di klik
+      //ketika tombol detail di klik
       const modalDetailButton = document.querySelectorAll(".modal-detail-btn");
       modalDetailButton.forEach((btn) => {
         btn.addEventListener("click", function () {
