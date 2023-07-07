@@ -16,31 +16,6 @@ self.addEventListener("install", function (event) {
 });
 
 self.addEventListener("fetch", function (event) {
-  // event.respondWith(
-  //   caches
-  //     .match(event.request)
-  //     .then(function (response) {
-  //       if (response) {
-  //         return response;
-  //       }
-
-  //       // Menjalankan permintaan jaringan hanya jika ada koneksi internet
-  //       if (!navigator.onLine) {
-  //         return caches.match("offline.html");
-  //       }
-
-  //       return fetch(event.request).then(function (response) {
-  //         let responseToCache = response.clone();
-  //         caches.open("my-cache").then(function (cache) {
-  //           cache.put(event.request, responseToCache);
-  //         });
-  //         return response;
-  //       });
-  //     })
-  //     .catch(function () {
-  //       return caches.match("offline.html"); // Mengembalikan halaman offline jika terjadi kesalahan lain
-  //     })
-  // );
   // Mengecek apakah permintaan berasal dari domain eksternal
   if (event.request.url.startsWith(self.location.origin)) {
     event.respondWith(
